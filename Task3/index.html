@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Carousel</title>
+    <style>
+          body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        img {
+            height: 380px;
+            width: 600px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+         button {
+            font-size: 28px;
+            padding: 12px 18px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <button class="left"><</button>
+    <img src="assets/img2.jpg">
+    <button class="right">></button>
+    <script>
+        const img = document.querySelector('img');
+        const left = document.querySelector('.left');
+        const right = document.querySelector('.right');
+        let imgs = ["assets/img1.jpg","assets/img2.jpg","assets/img3.jpg","assets/img4.jpg","assets/img5.jpg"]
+        let idx=0;
+        left.addEventListener('click',(e)=>{
+            let previdx = (idx==0)?4:idx-1;
+            idx=previdx;
+            img.src=imgs[idx];
+        })
+        right.addEventListener('click',(e)=>{
+            let nextidx = (idx+1)%5;
+            idx=nextidx;
+            img.src=imgs[idx];
+            
+        })
+
+        function startAutoSlide() {
+            interval = setInterval(() => {
+                let nextidx = (idx+1)%5;
+            idx=nextidx;
+            img.src=imgs[idx];
+            }, 3000);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(interval);
+        }
+
+        img.addEventListener('mouseenter', stopAutoSlide);
+        img.addEventListener('mouseleave', startAutoSlide);
+
+        startAutoSlide();
+
+
+
+
+
+    </script>
+    
+</body>
+</html>
